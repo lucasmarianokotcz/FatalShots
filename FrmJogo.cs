@@ -6,7 +6,7 @@ namespace FatalShots
     public partial class FrmJogo : Form
     {
         private const int VelocidadeTirosNave = 15;
-        private TimeSpan tempoRestante = TimeSpan.FromSeconds(10);
+        private TimeSpan tempoRestante = TimeSpan.FromMinutes(1);
         private bool jogoRodando = true;
 
         public FrmJogo()

@@ -20,6 +20,17 @@
             }
         }
 
+        internal static void ZerarPontos(Label lblPontos)
+        {
+            pontos = 0;
+            lblPontos.Text = $"Pontos: {pontos}";
+        }
+
+        internal static void ZerarTempo(Label lblTimer)
+        {
+            lblTimer.Text = "Tempo: 1:00";
+        }
+
         private static void AtualizaPontos(Label lblPontos)
         {
             pontos++;

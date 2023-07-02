@@ -1,12 +1,12 @@
-using FatalShots.Properties;
-using System.Drawing.Text;
+using System.Windows.Forms;
 
 namespace FatalShots
 {
     public partial class FrmJogo : Form
     {
         private const int VelocidadeTirosNave = 15;
-        private TimeSpan tempoRestante = TimeSpan.FromMinutes(1);
+        private const double MinutosJogo = 1;
+        private TimeSpan tempoRestante = TimeSpan.FromMinutes(MinutosJogo);
         private bool jogoRodando = true;
 
         public FrmJogo()
@@ -19,7 +19,7 @@ namespace FatalShots
         #region Form
         private void FrmJogo_Load(object sender, EventArgs e)
         {
-            IniciarTimers();
+            IniciarJogo();
         }
 
         private void FrmJogo_KeyDown(object sender, KeyEventArgs e)
@@ -112,9 +112,7 @@ namespace FatalShots
             }
             else
             {
-                jogoRodando = false;
-                PararTimers(pararTiros: false);
-                MessageBox.Show($"O jogo acabou! Você fez {Jogo.pontos} pontos.", "Fim de jogo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                TerminarJogo();
             }
         }
         #endregion
@@ -124,6 +122,34 @@ namespace FatalShots
         #region Métodos
 
         #region Jogo
+        public void IniciarJogo()
+        {
+            ZerarJogo();
+            jogoRodando = true;
+            IniciarTimers();
+        }
+
+        private void TerminarJogo()
+        {
+            jogoRodando = false;
+            PararTimers(pararTiros: false);
+            MessageBox.Show($"O jogo acabou! Você fez {Jogo.pontos} pontos.", "Fim de jogo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            DialogResult result = new FrmNovoJogo().ShowDialog();
+            if (result == DialogResult.Cancel)
+            {
+                IniciarJogo();
+            }
+        }
+
+        private void ZerarJogo()
+        {
+            tempoRestante = TimeSpan.FromMinutes(MinutosJogo);
+            PararTimers();
+            Monstro.ZerarMonstros(PnlJogo);
+            Jogo.ZerarPontos(LblPontos);
+            Jogo.ZerarTempo(LblTimer);
+        }
+
         private void PausarJogo()
         {
             PararTimers();
@@ -138,7 +164,7 @@ namespace FatalShots
 
         private void PararTimers(bool pararTiros = true)
         {
-            TmrMonstros.Stop();            
+            TmrMonstros.Stop();
             TmrTempo.Stop();
 
             if (pararTiros)
@@ -152,7 +178,7 @@ namespace FatalShots
                 TmrMonstros.Start();
                 TmrTiros.Start();
                 TmrTempo.Start();
-            }         
+            }
         }
 
         private void EsconderMenu()

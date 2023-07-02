@@ -35,6 +35,17 @@ namespace FatalShots
             pnlJogo.Controls.Add(picMonstro);
         }
 
+        internal static void ZerarMonstros(Panel pnlJogo)
+        {
+            foreach (Control control in pnlJogo.Controls)
+            {
+                if (!control.Name.StartsWith("picMonstro"))
+                    continue;
+
+                Dispose(control);
+            }
+        }
+
         internal static void Dispose(params Control[] controls)
         {
             foreach (Control control in controls)

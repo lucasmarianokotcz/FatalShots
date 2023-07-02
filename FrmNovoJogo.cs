@@ -26,14 +26,15 @@ namespace FatalShots
             if (FormularioInvalido())
                 return;
 
+            bool salvouPontuacao = false;
+
             try
             {
                 PontuacaoJogador pontuacao = new(TxtApelido.Text.Trim(), _pontuacao);
                 if (await pontuacao.SalvarPontuacaoJogador())
                 {
                     TxtApelido.Enabled = BtnEnviar.Enabled = false;
-
-                    await ObterPontuacoesJogadores();
+                    salvouPontuacao = true;
                 }
                 else
                     throw new Exception();
@@ -41,7 +42,7 @@ namespace FatalShots
             catch (Exception ex)
             {
                 MessageBox.Show($"Ocorreu um erro ao salvar a sua pontuação. Detalhes técnicos: {ex.Message}",
-                    "Erro ao salvar pontuação",
+                    "Erro ao salvar pontuação.",
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Error);
 
@@ -51,36 +52,53 @@ namespace FatalShots
             {
                 BtnEnviar.Text = "Enviar";
             }
+            
+            if (salvouPontuacao)
+                await ObterPontuacoesJogadores();
         }
 
         private async Task ObterPontuacoesJogadores()
         {
-            LblTop5.Text = "Top 5 jogadores (carregando...)";
-
-            var pontuacoes = await new PontuacaoJogador().ObterPontucaoesJogadores();
-
-            // Converter a lista anônima para um DataTable
-            var newPont = pontuacoes.Select(p => new
+            try
             {
-                p.Apelido,
-                p.Pontuacao
-            }).ToList();
+                LblTop5.Text = "Top 5 jogadores (carregando...)";
 
-            DataTable dataTable = new();
+                var pontuacoes = await new PontuacaoJogador().ObterPontucaoesJogadores();
 
-            // Adicionar as colunas ao DataTable
-            dataTable.Columns.Add("Apelido", typeof(string));
-            dataTable.Columns.Add("Pontuação", typeof(int));
+                // Converter a lista anônima para um DataTable
+                var newPont = pontuacoes.Select(p => new
+                {
+                    p.Apelido,
+                    p.Pontuacao
+                }).ToList();
 
-            foreach (var item in newPont)
-            {
-                dataTable.Rows.Add(item.Apelido, item.Pontuacao);
+                DataTable dataTable = new();
+
+                // Adicionar as colunas ao DataTable
+                dataTable.Columns.Add("Apelido", typeof(string));
+                dataTable.Columns.Add("Pontuação", typeof(int));
+
+                foreach (var item in newPont)
+                {
+                    dataTable.Rows.Add(item.Apelido, item.Pontuacao);
+                }
+
+                // Atribuir o DataTable como a fonte de dados do DataGridView
+                DgvPontuacoes.DataSource = dataTable;
             }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Ocorreu um erro ao obter as pontuações dos jogadores. Detalhes técnicos: {ex.Message}",
+                    "Erro ao obter pontuações.",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
 
-            // Atribuir o DataTable como a fonte de dados do DataGridView
-            DgvPontuacoes.DataSource = dataTable;
-
-            LblTop5.Text = "Top 5 jogadores";
+                BtnEnviar.Enabled = true;
+            }
+            finally
+            {
+                LblTop5.Text = "Top 5 jogadores";
+            }
         }
 
         private bool FormularioInvalido()

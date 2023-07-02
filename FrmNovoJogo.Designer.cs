@@ -33,14 +33,17 @@
             TxtApelido = new TextBox();
             label1 = new Label();
             BtnEnviar = new Button();
+            DgvPontuacoes = new DataGridView();
+            LblTop5 = new Label();
+            ((System.ComponentModel.ISupportInitialize)DgvPontuacoes).BeginInit();
             SuspendLayout();
             // 
             // BtnNovoJogo
             // 
             BtnNovoJogo.Font = new Font("Comic Sans MS", 15.75F, FontStyle.Regular, GraphicsUnit.Point);
-            BtnNovoJogo.Location = new Point(12, 121);
+            BtnNovoJogo.Location = new Point(12, 333);
             BtnNovoJogo.Name = "BtnNovoJogo";
-            BtnNovoJogo.Size = new Size(198, 74);
+            BtnNovoJogo.Size = new Size(200, 74);
             BtnNovoJogo.TabIndex = 2;
             BtnNovoJogo.Text = "Novo jogo";
             BtnNovoJogo.UseVisualStyleBackColor = true;
@@ -49,9 +52,9 @@
             // BtnSair
             // 
             BtnSair.Font = new Font("Comic Sans MS", 15.75F, FontStyle.Regular, GraphicsUnit.Point);
-            BtnSair.Location = new Point(282, 121);
+            BtnSair.Location = new Point(284, 333);
             BtnSair.Name = "BtnSair";
-            BtnSair.Size = new Size(194, 74);
+            BtnSair.Size = new Size(196, 74);
             BtnSair.TabIndex = 3;
             BtnSair.Text = "Sair do jogo";
             BtnSair.UseVisualStyleBackColor = true;
@@ -63,7 +66,7 @@
             TxtApelido.Location = new Point(12, 60);
             TxtApelido.MaxLength = 20;
             TxtApelido.Name = "TxtApelido";
-            TxtApelido.Size = new Size(351, 37);
+            TxtApelido.Size = new Size(303, 37);
             TxtApelido.TabIndex = 0;
             // 
             // label1
@@ -79,20 +82,49 @@
             // BtnEnviar
             // 
             BtnEnviar.Font = new Font("Comic Sans MS", 15.75F, FontStyle.Regular, GraphicsUnit.Point);
-            BtnEnviar.Location = new Point(369, 60);
+            BtnEnviar.Location = new Point(321, 60);
             BtnEnviar.Name = "BtnEnviar";
-            BtnEnviar.Size = new Size(107, 37);
+            BtnEnviar.Size = new Size(159, 37);
             BtnEnviar.TabIndex = 1;
             BtnEnviar.Text = "Enviar";
             BtnEnviar.UseVisualStyleBackColor = true;
             BtnEnviar.Click += BtnEnviar_Click;
             // 
+            // DgvPontuacoes
+            // 
+            DgvPontuacoes.AllowUserToAddRows = false;
+            DgvPontuacoes.AllowUserToDeleteRows = false;
+            DgvPontuacoes.AllowUserToResizeColumns = false;
+            DgvPontuacoes.AllowUserToResizeRows = false;
+            DgvPontuacoes.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            DgvPontuacoes.Location = new Point(103, 150);
+            DgvPontuacoes.MultiSelect = false;
+            DgvPontuacoes.Name = "DgvPontuacoes";
+            DgvPontuacoes.ReadOnly = true;
+            DgvPontuacoes.RowTemplate.Height = 25;
+            DgvPontuacoes.ScrollBars = ScrollBars.None;
+            DgvPontuacoes.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            DgvPontuacoes.Size = new Size(287, 177);
+            DgvPontuacoes.TabIndex = 4;
+            // 
+            // LblTop5
+            // 
+            LblTop5.Font = new Font("Comic Sans MS", 14.25F, FontStyle.Regular, GraphicsUnit.Point);
+            LblTop5.Location = new Point(12, 112);
+            LblTop5.Name = "LblTop5";
+            LblTop5.Size = new Size(464, 26);
+            LblTop5.TabIndex = 5;
+            LblTop5.Text = "Top 5 jogadores";
+            LblTop5.TextAlign = ContentAlignment.MiddleCenter;
+            // 
             // FrmNovoJogo
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(492, 221);
+            ClientSize = new Size(492, 419);
             ControlBox = false;
+            Controls.Add(LblTop5);
+            Controls.Add(DgvPontuacoes);
             Controls.Add(BtnEnviar);
             Controls.Add(label1);
             Controls.Add(TxtApelido);
@@ -103,6 +135,8 @@
             ShowInTaskbar = false;
             StartPosition = FormStartPosition.CenterScreen;
             Text = "FatalShots v1.0";
+            Load += FrmNovoJogo_Load;
+            ((System.ComponentModel.ISupportInitialize)DgvPontuacoes).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -114,5 +148,7 @@
         private TextBox TxtApelido;
         private Label label1;
         private Button BtnEnviar;
+        private DataGridView DgvPontuacoes;
+        private Label LblTop5;
     }
 }

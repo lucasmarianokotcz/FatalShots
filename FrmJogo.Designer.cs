@@ -30,7 +30,7 @@
         {
             components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmJogo));
-            PicJogador = new PictureBox();
+            PicNave = new PictureBox();
             PnlMenu = new Panel();
             label1 = new Label();
             BtnVoltar = new Button();
@@ -41,20 +41,20 @@
             TmrTiros = new System.Windows.Forms.Timer(components);
             TmrMonstros = new System.Windows.Forms.Timer(components);
             TmrTempo = new System.Windows.Forms.Timer(components);
-            ((System.ComponentModel.ISupportInitialize)PicJogador).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)PicNave).BeginInit();
             PnlMenu.SuspendLayout();
             PnlJogo.SuspendLayout();
             SuspendLayout();
             // 
-            // PicJogador
+            // PicNave
             // 
-            PicJogador.Image = (Image)resources.GetObject("PicJogador.Image");
-            PicJogador.Location = new Point(360, 310);
-            PicJogador.Name = "PicJogador";
-            PicJogador.Size = new Size(75, 75);
-            PicJogador.SizeMode = PictureBoxSizeMode.StretchImage;
-            PicJogador.TabIndex = 0;
-            PicJogador.TabStop = false;
+            PicNave.Image = (Image)resources.GetObject("PicNave.Image");
+            PicNave.Location = new Point(360, 310);
+            PicNave.Name = "PicNave";
+            PicNave.Size = new Size(75, 75);
+            PicNave.SizeMode = PictureBoxSizeMode.StretchImage;
+            PicNave.TabIndex = 0;
+            PicNave.TabStop = false;
             // 
             // PnlMenu
             // 
@@ -103,7 +103,7 @@
             // 
             // PnlJogo
             // 
-            PnlJogo.Controls.Add(PicJogador);
+            PnlJogo.Controls.Add(PicNave);
             PnlJogo.Location = new Point(2, 41);
             PnlJogo.Name = "PnlJogo";
             PnlJogo.Size = new Size(797, 409);
@@ -163,7 +163,7 @@
             Load += FrmJogo_Load;
             KeyDown += FrmJogo_KeyDown;
             KeyPress += FrmJogo_KeyPress;
-            ((System.ComponentModel.ISupportInitialize)PicJogador).EndInit();
+            ((System.ComponentModel.ISupportInitialize)PicNave).EndInit();
             PnlMenu.ResumeLayout(false);
             PnlMenu.PerformLayout();
             PnlJogo.ResumeLayout(false);
@@ -173,7 +173,7 @@
 
         #endregion
 
-        private PictureBox PicJogador;
+        private PictureBox PicNave;
         private Panel PnlMenu;
         private Button BtnVoltar;
         private Button BtnSair;

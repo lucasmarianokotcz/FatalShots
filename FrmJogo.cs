@@ -5,7 +5,7 @@ namespace FatalShots
     public partial class FrmJogo : Form
     {
         private const int VelocidadeTirosNave = 15;
-        private const double MinutosJogo = 1;
+        private const double MinutosJogo = 0.1;
         private TimeSpan tempoRestante = TimeSpan.FromMinutes(MinutosJogo);
         private bool jogoRodando = true;
 
@@ -29,15 +29,15 @@ namespace FatalShots
                 switch (e.KeyCode)
                 {
                     case Keys.Left:
-                        Jogador.MoverEsquerda(PicJogador);
+                        Jogador.MoverEsquerda(PicNave);
                         break;
 
                     case Keys.Right:
-                        Jogador.MoverDireita(PicJogador);
+                        Jogador.MoverDireita(PicNave);
                         break;
 
                     case Keys.Space:
-                        Jogador.Atirar(PicJogador, PnlJogo);
+                        Jogador.Atirar(PicNave, PnlJogo);
                         break;
 
                     default:
@@ -82,9 +82,9 @@ namespace FatalShots
                 if (!control.Name.StartsWith("picMissel"))
                     continue;
 
-                if (control is not null && control.Name != PicJogador.Name)
+                if (control is not null && control.Name != PicNave.Name)
                 {
-                    if (control.Top > 0)
+                    if (control.Top > 0 && jogoRodando)
                     {
                         control.Top -= VelocidadeTirosNave;
                         Jogo.CalcularAcertoMonstro((PictureBox)control, PnlJogo, LblPontos);
@@ -134,7 +134,7 @@ namespace FatalShots
             jogoRodando = false;
             PararTimers(pararTiros: false);
             MessageBox.Show($"O jogo acabou! Você fez {Jogo.pontos} pontos.", "Fim de jogo", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            DialogResult result = new FrmNovoJogo().ShowDialog();
+            DialogResult result = new FrmNovoJogo(Jogo.pontos).ShowDialog();
             if (result == DialogResult.Cancel)
             {
                 IniciarJogo();
@@ -148,6 +148,12 @@ namespace FatalShots
             Monstro.ZerarMonstros(PnlJogo);
             Jogo.ZerarPontos(LblPontos);
             Jogo.ZerarTempo(LblTimer);
+            ReposicionarNave();
+        }
+
+        private void ReposicionarNave()
+        {
+            PicNave.Location = new Point(360, 310);
         }
 
         private void PausarJogo()

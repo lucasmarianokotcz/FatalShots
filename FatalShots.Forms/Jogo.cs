@@ -4,16 +4,17 @@
     {
         public static int pontos;
 
-        internal static void CalcularAcertoMonstro(PictureBox missel, Panel pnlJogo, Label lblPontos)
+        internal static void CalcularAcertoMonstro(PictureBox missil, Panel pnlJogo, Label lblPontos)
         {
             foreach (Control control in pnlJogo.Controls)
             {
                 if (!control.Name.StartsWith("picMonstro"))
                     continue;
 
-                if (MisselAcertaMonstro(control, missel))
+                if (MissilAcertaMonstro(control, missil))
                 {
-                    Dispose(control, missel);
+                    Monstro.EmitirSomMonstroMorto();
+                    Dispose(control, missil);
                     AtualizaPontos(lblPontos);
                     Monstro.GerarMonstro(pnlJogo);
                 }
@@ -37,8 +38,8 @@
             lblPontos.Text = $"Pontos: {pontos}";
         }
 
-        internal static bool MisselAcertaMonstro(Control monstro, Control missel) =>
-            monstro.Bounds.IntersectsWith(missel.Bounds);
+        internal static bool MissilAcertaMonstro(Control monstro, Control missil) =>
+            monstro.Bounds.IntersectsWith(missil.Bounds);
 
         internal static void Dispose(params Control[] controls)
         {

@@ -79,7 +79,7 @@ namespace FatalShots
         {
             foreach (Control control in PnlJogo.Controls)
             {
-                if (!control.Name.StartsWith("picMissel"))
+                if (!control.Name.StartsWith("picMissil"))
                     continue;
 
                 if (control is not null && control.Name != PicNave.Name)

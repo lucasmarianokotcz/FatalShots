@@ -34,9 +34,15 @@ namespace FatalShots
 
         internal static void Atirar(PictureBox PicJogador, Panel pnlJogo)
         {
-            PictureBox picMissel = new()
+            LancarMissil(PicJogador, pnlJogo);
+            EmitirSomMissil();
+        }
+
+        private static void LancarMissil(PictureBox PicJogador, Panel pnlJogo)
+        {
+            PictureBox picMissil = new()
             {
-                Name = "picMissel" + Random.Shared.Next(),
+                Name = "picMissil" + Random.Shared.Next(),
                 Image = Resources.missile,
                 Width = 25,
                 Height = 35,
@@ -45,7 +51,13 @@ namespace FatalShots
                 Top = PicJogador.Top - 50
             };
 
-            pnlJogo.Controls.Add(picMissel);
+            pnlJogo.Controls.Add(picMissil);
+        }
+
+        private static void EmitirSomMissil()
+        {
+            using System.Media.SoundPlayer player = new(Resources.shot);
+            player.Play();
         }
     }
 }

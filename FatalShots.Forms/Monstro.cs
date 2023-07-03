@@ -46,6 +46,12 @@ namespace FatalShots
             }
         }
 
+        internal static void EmitirSomMonstroMorto()
+        {
+            using System.Media.SoundPlayer player = new(Resources.hit);
+            player.Play();
+        }
+
         internal static void Dispose(params Control[] controls)
         {
             foreach (Control control in controls)

@@ -1,4 +1,4 @@
-﻿using FatalShots.Properties;
+﻿using FatalShots.Forms.Properties;
 
 namespace FatalShots
 {

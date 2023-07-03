@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.6.33815.320
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FatalShots", "FatalShots.csproj", "{139C04B2-810F-408A-857D-44479EDA637D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FatalShots.Forms", "FatalShots.Forms\FatalShots.Forms.csproj", "{139C04B2-810F-408A-857D-44479EDA637D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FatalShots.Data", "..\FatalShots.Data\FatalShots.Data.csproj", "{86A969BA-DBA9-48B9-B7F8-55BD58277654}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FatalShots.Data", "FatalShots.Data\FatalShots.Data.csproj", "{86A969BA-DBA9-48B9-B7F8-55BD58277654}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

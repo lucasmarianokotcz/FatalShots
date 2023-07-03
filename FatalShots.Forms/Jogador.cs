@@ -1,5 +1,4 @@
-﻿using FatalShots.Properties;
-using Timer = System.Windows.Forms.Timer;
+﻿using FatalShots.Forms.Properties;
 
 namespace FatalShots
 {
